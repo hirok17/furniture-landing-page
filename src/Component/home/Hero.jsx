@@ -1,5 +1,6 @@
 import { FaSearch } from 'react-icons/fa'
 import bannerImg from '../../assets/banner.png'
+import ToolTip from '../share/ToolTip'
 
 const Hero = () => {
   return (
@@ -20,6 +21,15 @@ const Hero = () => {
         <div className='absolute inset-x-0 bottom-0 h-3/4 bg-gradient-to-t from-white via-transparent to-transparent blur-sm' /> 
 
         {/* hover button tooltip */}
+        <div className='hidden lg:flex absolute bottom-75 left-30 '>
+            <ToolTip/>
+        </div>
+         <div className='hidden lg:flex absolute bottom-90 left-80 '>
+            <ToolTip/>
+        </div>
+        <div className='hidden lg:flex absolute bottom-90 right-80 '>
+            <ToolTip/>
+        </div>
      </section>
   )
 }

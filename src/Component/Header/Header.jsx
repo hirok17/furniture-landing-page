@@ -1,35 +1,49 @@
 import { Link, NavLink } from "react-router"
 import { FaBarsStaggered, FaCartShopping } from "react-icons/fa6";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaTimes } from "react-icons/fa";
 
 const navItems = [
   { name: "Home", path: "/" },
+    { name: "Shop", path: "/shop" },
   { name: "About", path: "/about" },
-  { name: "Contact", path: "/contact" },
-  { name: "Shop", path: "/shop" },
+  { name: "Contact", path: "/contact" }
+
 ];
 
 const navber = navItems.map((item, index) => (
   <li key={index}>
 <NavLink to={item.path}
-  className={({ isActive }) => (isActive ? "primary-color font-bold" : "md:text-white text-white hover:text-[#E58411]") }
+  className={({ isActive }) => (isActive ? "primary-color font-bold" : "hover:text-[#E58411]") }
   >{item.name}
   </NavLink>
   </li>
 ));
 const Header = () => {
   const [isOpnen, setIsOpen] =useState(false);
-  console.log(isOpnen);
-
+  const [isScrolled, setIsScrolled]=useState(false);
+  
   const toggleMenu =()=>{
       setIsOpen(prevState =>!prevState);
   }
+  useEffect(()=>{
+    const handleScroll =()=>{
+      if(window.scrollY >50){
+        setIsScrolled(true);
+      }else{
+        setIsScrolled(false);
+      }
+    }
+    window.addEventListener('scroll', handleScroll);
+    return ()=>{
+       window.addEventListener('scroll', handleScroll);
+    }
+  }, [])
   return (
-    <header className={`fixed top-0 left-0 right-0 z-10 pt-4 transition duration-300 ease-in-out text-white`}>
-        <nav className="max-w-screen-2xl container mx-auto flex justify-between items-center px-6">
+    <header className={`fixed top-0 left-0 right-0 z-10 pt-4 transition duration-300 ease-in-out ${isScrolled ? 'bg-white shadow-md text-gray-800 py-3': 'bg-transparent text-white'}`}>
+        <nav className="max-w-screen-2xl mx-auto flex justify-between items-center px-6">
             <div>
-              <Link to="/" className="text-2xl font-bold text-white">Panto</Link>
+              <Link to="/" className="text-2xl font-bold">Panto</Link>
             </div>
             {/* desktop menu */}
             <div>
@@ -46,7 +60,7 @@ const Header = () => {
             <div className={`fixed top-0 left-0 w-full h-screen bg-black opacity-80 space-y-6 flex flex-col justify-center items-center transition-transform transform ${isOpnen ? 'translate-x-0' : '-translate-x-full'} md:hidden`}>
               <div onClick={toggleMenu} className="absolute top-4 right-4 text-xl cursor-pointer text-white"><FaTimes /></div>
               <div>
-                 <ul onClick={toggleMenu} className="md:hidden flex flex-col gap-5">
+                 <ul onClick={toggleMenu} className="md:hidden flex flex-col gap-5 text-white">
                     {navber}
                 </ul>
               </div>
