@@ -1,3 +1,6 @@
+import { products } from "../../utils/products";
+import ProductCart from "./ProductCart";
+
 const Products = ({ title }) => {
     const categories =['Chair', 'Beds', 'Sofa', 'Lamp'];
   return (
@@ -17,6 +20,12 @@ const Products = ({ title }) => {
             }
 
           </div>
+        </div>
+        {/* product grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mt-5">
+          {
+            products.map((product, index)=><ProductCart key={index} product={product}></ProductCart>)
+          }
         </div>
       </div>
     </section>
