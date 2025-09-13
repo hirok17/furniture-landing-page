@@ -1,8 +1,12 @@
 import { FaSearch } from 'react-icons/fa'
 import bannerImg from '../../assets/banner.png'
 import ToolTip from '../share/ToolTip'
+import { BsMoon, BsSun } from 'react-icons/bs'
+import { useContext } from 'react'
+import { ThemeContext } from '../../context/ThemeContext'
 
 const Hero = () => {
+    const {isDarkMode, toggleTheme} =useContext(ThemeContext);
   return (
      <section className='lg:h-[1084px] h-[700px] relative bg-center bg-cover text-white' style={{backgroundImage:`url(${bannerImg})`}}>
         <div className='text-center lg:pt-48 pt-30 lg:space-y-6 space-y-5 font-medium xl:w-1/2 lg:w-[70%] md:w-[50%] mx-auto'>
@@ -29,6 +33,15 @@ const Hero = () => {
         </div>
         <div className='hidden lg:flex absolute bottom-90 right-80 '>
             <ToolTip/>
+        </div>
+
+        {/* dark and light mood */}
+        <div className='absolute bottom-20 right-0 z-40'>
+            <button onClick={toggleTheme} className='focus:outline-none font-bold bg-black p-5 rounded-full cursor-pointer'>
+               {
+                isDarkMode ?  <BsSun className='text-yellow-500 text-2xl' /> : <BsMoon className='text-yellow-500 text-2xl' />
+               }
+            </button>
         </div>
      </section>
   )

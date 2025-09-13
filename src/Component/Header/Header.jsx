@@ -1,7 +1,8 @@
 import { Link, NavLink } from "react-router"
 import { FaBarsStaggered, FaCartShopping } from "react-icons/fa6";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { FaTimes } from "react-icons/fa";
+import { ThemeContext } from "../../context/ThemeContext";
 
 const navItems = [
   { name: "Home", path: "/" },
@@ -22,6 +23,7 @@ const navber = navItems.map((item, index) => (
 const Header = () => {
   const [isOpnen, setIsOpen] =useState(false);
   const [isScrolled, setIsScrolled]=useState(false);
+  const {totallItem} =useContext(ThemeContext)
   
   const toggleMenu =()=>{
       setIsOpen(prevState =>!prevState);
@@ -53,7 +55,7 @@ const Header = () => {
             </div>
             {/* cart icon */}
             <div className="hidden md:flex items-center cursor-pointer">
-                <span className="relative"><FaCartShopping className="text-xl" /> <sup className="absolute -top-1 -right-3 text-xs bg-[#E58411] text-white rounded-full px-1">0</sup></span>
+                <span className="relative"><FaCartShopping className="text-xl" /> <sup className="absolute -top-1 -right-3 text-xs bg-[#E58411] text-white rounded-full px-1">{totallItem}</sup></span>
 
             </div>
             {/* mobile menu item */}
